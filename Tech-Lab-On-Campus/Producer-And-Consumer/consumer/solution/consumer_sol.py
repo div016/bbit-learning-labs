@@ -34,14 +34,20 @@ class mqConsumer(mqConsumerInterface):
             )
         # Set-up Callback function for receiving messages
         self.channel.basic_consume(self.queue_name, 
-            self.setupRMQConnection, auto_ack=False)
+            self.on_message_callback, auto_ack=False)
 
     def on_message_callback(self, channel, method_frame, header_frame, body) -> None:
         # Acknowledge message
+        # self.channel = channel
+
         self.channel.basic_ack(method_frame.delivery_tag, False)
-        message = json.loads(body)
+
+        # json_body = body.decode("utf-8").replace("'", '"')
+        # print(f"type of json_body: {type(json_body)}")
+        # message = json.loads(json_body)
+        # message = json.loads(body)
         #Print message (The message is contained in the body parameter variable)
-        print(message)
+        print(body)
 
         self.channel.close()
         self.connection.close()

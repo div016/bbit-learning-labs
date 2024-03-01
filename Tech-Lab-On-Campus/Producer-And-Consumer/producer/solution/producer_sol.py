@@ -15,7 +15,7 @@ class mqProducer(mqProducerInterface):
 
         # Call setupRMQConnection
         self.setupRMQConnection()
-        print(f"LOG: Set up RMQ Connection at {self.connection}")
+        # print(f"LOG: Set up RMQ Connection at {self.connection}")
 
     def setupRMQConnection(self) -> None:
         # Set-up Connection to RabbitMQ service
