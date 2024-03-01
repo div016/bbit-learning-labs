@@ -38,6 +38,7 @@ class mqConsumer(mqConsumerInterface):
 
     def on_message_callback(self, channel, method_frame, header_frame, body) -> None:
         # Acknowledge message
+        self.channel.basic_ack(method_frame.delivery_tag, False)
         message = json.loads(body)
         #Print message (The message is contained in the body parameter variable)
         print(message)
